@@ -1,29 +1,35 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  books: [],
-  posts: ""
+  notes: []
 };
 
 const Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_NEW_BOOK: {
-      return {
-        ...state,
-        books: [...state.books, action.book]
-      };
+    case actionTypes.ADD_NEW_NOTE: {
+      if (state.notes.length > 0) {
+        return {
+          ...state,
+          notes: [...state.notes, action.note]
+        };
+      } else {
+        return {
+          ...state,
+          notes: [action.note]
+        };
+      }
     }
-    case actionTypes.CHANGE_POSTS: {
+    case actionTypes.REMOVE_NOTE: {
+      const newNotes = state.notes.filter((note, index) => {
+        if (index !== action.index) {
+          return note;
+        }
+        return null
+      });
+
       return {
         ...state,
-        posts: action.post
-      };
-    }
-    case actionTypes.UPDATE_STATE: {
-      const key = action.key;
-      return {
-        ...state,
-        [key]: action.value
+        notes: newNotes
       };
     }
     default: {

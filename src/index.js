@@ -1,35 +1,25 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import lsChangeDetector from 'js-localstorage-change-detector'
-export class ReduxStateChangeUpdater extends Component {
-  componentDidMount() {
-    const store = this.props.subscribedStore
-    lsChangeDetector.addChangeListener('onChange', null, (key, value) => {
-      if (value) {
-        store.dispatch(this.props.updateState(key, JSON.parse(value)))
+import { REHYDRATE } from 'redux-persist'
+
+function localTabReduxStateChanger(store, config) {
+  lsChangeDetector.addChangeListener('onChange', null, (key, value) => {
+    const checkKey = key && key.lastIndexOf(config.key) !== -1
+    if (checkKey) {
+      const storeState = JSON.parse(value)
+      if (storeState) {
+        const newState = Object.keys(storeState).reduce((state, reducerKey) => {
+          state[reducerKey] = JSON.parse(storeState[reducerKey])
+
+          return state
+        }, {})
+        store.dispatch({
+          key: config.key,
+          payload: newState,
+          type: REHYDRATE
+        })
       }
-    })
-  }
-  render() {
-    return <div />
-  }
-}
-ReduxStateChangeUpdater.propTypes = {
-  subscribedStore: PropTypes.object,
-  updateState: PropTypes.func
-}
-
-export const subscribeStore = (store) => {
-  console.log(store.getState())
-  store.subscribe(() => {
-    const stateInStore = store.getState()
-    Object.keys(stateInStore).map(key => {
-      window.localStorage.setItem(key, JSON.stringify(stateInStore[key]))
-    })
+    }
   })
-
-  return store
 }
-//  export const subscribeCombinedReducersStore=(store)=>{
 
-// }
+export default localTabReduxStateChanger

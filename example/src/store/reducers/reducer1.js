@@ -12,13 +12,6 @@ const Reducer1 = (state = initialState, action) => {
         posts: action.post
       };
     }
-    // case actionTypes.UPDATE_STATE: {
-    //   const key = action.key;
-    //   return {
-    //     ...state,
-    //     [key]: action.value
-    //   };
-    // }
     default: {
       return state;
     }

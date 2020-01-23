@@ -3,33 +3,38 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
-import BookReducer from "./store/reducers/reducer";
+import NoteReducer from "./store/reducers/reducer";
 import PostReducer from "./store/reducers/reducer1";
-import {
-  subscribeStore,
-  ReduxStateChangeUpdater
-} from "reverse-redux-persist";
-import { updateState } from "./store/actions/actionCreators";
+import localTabReduxStateChanger from "reverse-redux-persist";
 import App from "./App";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { PersistGate } from "redux-persist/integration/react";
 
 const RootReducer = combineReducers({
-  BookReducer: BookReducer,
+  NoteReducer: NoteReducer,
   PostReducer: PostReducer
 });
+
+const persistConfig = {
+  key: "root",
+  storage
+};
+
+const persistreducer = persistReducer(persistConfig, RootReducer);
 const store = createStore(
-  RootReducer,
+  persistreducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+const persistor = persistStore(store);
 
-const subscribedStore = subscribeStore(store);
+localTabReduxStateChanger(store, persistConfig);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ReduxStateChangeUpdater
-      subscribedStore={subscribedStore}
-      updateState={updateState}
-    />
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

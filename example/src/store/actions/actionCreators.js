@@ -1,17 +1,9 @@
 import * as actionTypes from './actionTypes'
 
-export const addNewBook = (book) => {
+export const addNewNote = (note) => {
   return {
-    type: actionTypes.ADD_NEW_BOOK,
-    book: book
-  }
-}
-
-export const updateState=(key,value)=>{
-  return {
-    type:actionTypes.UPDATE_STATE,
-    key:key,
-    value:value
+    type: actionTypes.ADD_NEW_NOTE,
+    note: note
   }
 }
 
@@ -20,4 +12,11 @@ export const changePosts=(post)=>{
     type:actionTypes.CHANGE_POSTS,
     post:post
   }
+}
+
+export const removeNote=(index)=>{
+ return {
+   type:actionTypes.REMOVE_NOTE,
+   index:index
+ }
 }

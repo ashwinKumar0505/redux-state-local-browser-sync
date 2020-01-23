@@ -9,6 +9,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-persist": "^6.0.0",
     "reverse-redux-persist": "file:.."
   },
   "scripts": {

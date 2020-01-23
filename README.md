@@ -10,19 +10,62 @@
 npm install --save reverse-redux-persist
 ```
 
-## Usage
+## Basic Usage
+
+* Configure <a href="https://github.com/rt2zz/redux-persist">redux-persist</a> in your project.
+
+* Import redux-state-local-browser-sync.
+
+* Pass in persistConfig and store as props to the imported name of the redux-state-local-browser-sync
+
+### Configure redux-persist.
 
 ```jsx
-import React, { Component } from 'react'
+import { createStore } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
-import MyComponent from 'reverse-redux-persist'
+import rootReducer from './reducers'
 
-class Example extends Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export default () => {
+  let store = createStore(persistedReducer)
+  let persistor = persistStore(store)
+  return { store, persistor }
+}
+```
+
+### Import redux-state-local-browser-sync and pass persistConfig and store as props
+
+```jsx
+
+import { createStore } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' 
+import rootReducer from './reducers'
+import localTabReduxStateChanger from "redux-state-local-browser-sync"; //import redux-state-local-browser-sync
+
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export default () => {
+  let store = createStore(persistedReducer)
+  let persistor = persistStore(store)
+
+  localTabReduxStateChanger(persistConfig,store)  //pass persistConfig and store
+  
+  return { store, persistor }
 }
 ```
 
