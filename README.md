@@ -6,6 +6,8 @@
 
 A plugin which persists your redux state across local browsers.
 
+Simple configuration steps yet powerful plugin.
+
 
 <p align="center"><img src="demo.gif" alt="demo"></p>
 
