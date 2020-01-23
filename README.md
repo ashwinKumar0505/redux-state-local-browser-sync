@@ -7,7 +7,7 @@
 A plugin which persists your redux state across local browsers.
 
 
-<p align="center"><img src="demo11.gif" alt="demo"></p>
+<p align="center"><img src="demo.gif" alt="demo"></p>
 
 
 ## Install
