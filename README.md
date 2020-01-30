@@ -1,8 +1,6 @@
 # redux-state-local-browser-sync
 
-> 
-
-[![NPM](https://img.shields.io/npm/v/reverse-redux-persist.svg)](https://www.npmjs.com/package/reverse-redux-persist) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/reverse-redux-persist.svg)](https://www.npmjs.com/package/redux-state-local-browser-sync) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 A plugin which persists your redux state across local browsers.
 
