@@ -1,10 +1,17 @@
 {
-  "name": "redux-state-change-listener",
-  "version": "1.0.0",
-  "description": "",
+  "name": "redux-state-local-browser-sync",
+  "version": "1.0.1",
+  "description": "A plugin which persists your redux state across local browsers.",
   "author": "ashwinKumar0505",
   "license": "MIT",
-  "repository": "ashwinKumar0505/reverse-redux-persist",
+  "repository": "ashwinKumar0505/redux-state-local-browser-sync",
+  "keywords": [
+    "redux-store",
+    "local-storage",
+    "localtab-sync",
+    "persist",
+    "redux-persist"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
